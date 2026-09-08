@@ -7,7 +7,12 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
   <title>Pharmacy Sales | Jan-Aug 2025 vs 2026</title>
-  <link rel="stylesheet" href="styles.css?v=20260908-4" />
+  <link rel="stylesheet" href="styles.css?v=20260908-5" />
+  <style>
+    .filter-grid.four-filters{grid-template-columns:repeat(4,minmax(180px,1fr))}
+    @media(max-width:1100px){.filter-grid.four-filters{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:760px){.filter-grid.four-filters{grid-template-columns:1fr}}
+  </style>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 </head>
@@ -18,20 +23,20 @@
     <section id="dropZone" class="glass dropzone"><h2>Load both sales files</h2><p>Select or drop the 2025 and Jan–Aug 2026 Excel files together. The dashboard automatically finds the correct sheet/header and compares Jan–Aug only.</p><div id="status">Waiting for data…</div></section>
     <section id="dashboard" class="hidden">
       <section class="glass filters">
-        <div class="section-title"><h2>Linked Filters</h2><button id="resetFilters" class="ghost">Reset all</button></div>
-        <div class="filter-grid">
+        <div class="section-title"><h2>Sales Rep. Linked Filters</h2><button id="resetFilters" class="ghost">Reset all</button></div>
+        <div class="filter-grid four-filters">
           <div class="filter-card"><div class="filter-label">Sales Rep. Name</div><input class="filter-search" id="sRep" placeholder="Search rep…"><div id="fRep" class="check-list"></div></div>
           <div class="filter-card"><div class="filter-label">Zone</div><input class="filter-search" id="sZone" placeholder="Search zone…"><div id="fZone" class="check-list"></div></div>
-          <div class="filter-card"><div class="filter-label">State</div><input class="filter-search" id="sState" placeholder="Search state…"><div id="fState" class="check-list"></div></div>
           <div class="filter-card"><div class="filter-label">Name / Pharmacy</div><input class="filter-search" id="sName" placeholder="Search pharmacy…"><div id="fName" class="check-list"></div></div>
           <div class="filter-card"><div class="filter-label">Sales Return Value</div><input class="filter-search" id="sReturn" placeholder="Search return band…"><div id="fReturn" class="check-list"></div></div>
         </div>
-        <div class="hint">Select one or more checkboxes. Search narrows each list, and all filters remain cross-linked.</div>
+        <div hidden aria-hidden="true"><input id="sState" tabindex="-1"><div id="fState"></div></div>
+        <div class="hint">Choose a Sales Rep. to automatically narrow Zone and Pharmacy to only the records linked to that representative. Multiple selections are supported.</div>
       </section>
       <section class="kpis"><article class="glass kpi"><span>Jan–Aug 2025 Sales</span><strong id="k25">—</strong></article><article class="glass kpi"><span>Jan–Aug 2026 Sales</span><strong id="k26">—</strong></article><article class="glass kpi"><span>YoY Growth</span><strong id="kGrowth">—</strong></article><article class="glass kpi"><span>Return Rate 2026</span><strong id="kReturn">—</strong></article><article class="glass kpi"><span>Customers ≥ 10,000</span><strong id="k10k">—</strong></article></section>
       <section class="grid2"><article class="glass chart-card"><div class="section-title"><h2>Monthly Sales Comparison</h2><span>Jan–Aug only</span></div><div id="monthlyChart" class="chart"></div></article><article class="glass chart-card"><div class="section-title"><h2>Sales by State</h2><span>2025 vs 2026</span></div><div id="stateChart" class="chart"></div></article><article class="glass chart-card"><div class="section-title"><h2>Sales by Zone</h2><span>2025 vs 2026</span></div><div id="zoneChart" class="chart"></div></article><article class="glass chart-card"><div class="section-title"><h2>Returns Analysis</h2><span>2026 returned amount</span></div><div id="returnChart" class="chart"></div></article></section>
       <section class="glass leaderboard"><div class="section-title"><h2>Top Customers by State</h2><label class="inline">State <select id="leaderState"></select></label></div><div class="grid2 compact"><div><h3 class="up">Top 10 Growth ≥ 10%</h3><div id="growthChart" class="chart small"></div></div><div><h3 class="down">Top 10 Decline ≤ -10%</h3><div id="declineChart" class="chart small"></div></div></div></section>
       <section class="grid2"><article class="glass table-card"><div class="section-title"><h2>Pharmacy Analysis</h2><span>Jan–Aug comparison</span></div><input id="pharmacySearch" class="search" placeholder="Search pharmacy…"><div class="table-wrap"><table id="pharmacyTable"><thead><tr><th>Pharmacy</th><th>State</th><th>Zone</th><th>2025</th><th>2026</th><th>Growth</th><th>Returns 2026</th></tr></thead><tbody></tbody></table></div></article><article class="glass table-card"><div class="section-title"><h2>Customers ≥ 10,000</h2><span>2026 Jan–Aug sales</span></div><div class="table-wrap"><table id="highTable"><thead><tr><th>Customer</th><th>State</th><th>2025</th><th>2026</th><th>Growth</th></tr></thead><tbody></tbody></table></div></article></section>
     </section>
-  </main><script src="app.js?v=20260908-3"></script>
+  </main><script src="app.js?v=20260908-5"></script>
 </body></html>

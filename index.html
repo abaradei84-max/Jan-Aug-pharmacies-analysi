@@ -11,8 +11,16 @@
   <link rel="stylesheet" href="auth.css?v=20260908-1" />
   <style>
     .filter-grid.four-filters{grid-template-columns:repeat(4,minmax(180px,1fr))}
-    @media(max-width:1100px){.filter-grid.four-filters{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:760px){.filter-grid.four-filters{grid-template-columns:1fr}}
+    .rep-rank{margin-top:16px;padding:18px;border-color:rgba(57,231,242,.14)}
+    .rep-rank-head{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:12px}
+    .rep-rank-head h2{margin:0;font-size:17px}.rep-rank-head .rep-sub{color:var(--muted);font-size:12px;margin-top:3px}
+    .rep-select-wrap{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}.rep-select-wrap select{min-width:220px}
+    .rep-rank-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    .rep-rank-card{padding:16px;min-width:0;background:rgba(3,9,20,.42);border:1px solid rgba(255,255,255,.06);border-radius:14px}
+    .rep-rank-card h3{margin:0 0 6px;font-size:13px}.rep-rank-card p{margin:0 0 6px;color:var(--muted);font-size:11px}
+    .rep-rank-card .chart{height:320px}
+    @media(max-width:1100px){.filter-grid.four-filters{grid-template-columns:repeat(2,1fr)}.rep-rank-grid{grid-template-columns:1fr}}
+    @media(max-width:760px){.filter-grid.four-filters{grid-template-columns:1fr}.rep-rank-head{align-items:flex-start;flex-direction:column}.rep-select-wrap{width:100%;align-items:flex-start;flex-direction:column}.rep-select-wrap select{width:100%;min-width:0}}
   </style>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
@@ -55,9 +63,23 @@
       <section class="kpis"><article class="glass kpi"><span>Jan–Aug 2025 Sales</span><strong id="k25">—</strong></article><article class="glass kpi"><span>Jan–Aug 2026 Sales</span><strong id="k26">—</strong></article><article class="glass kpi"><span>YoY Growth</span><strong id="kGrowth">—</strong></article><article class="glass kpi"><span>Return Rate 2026</span><strong id="kReturn">—</strong></article><article class="glass kpi"><span>Customers ≥ 10,000</span><strong id="k10k">—</strong></article></section>
       <section class="grid2"><article class="glass chart-card"><div class="section-title"><h2>Monthly Sales Comparison</h2><span>Jan–Aug only</span></div><div id="monthlyChart" class="chart"></div></article><article class="glass chart-card"><div class="section-title"><h2>Sales by State</h2><span>2025 vs 2026</span></div><div id="stateChart" class="chart"></div></article><article class="glass chart-card"><div class="section-title"><h2>Sales by Zone</h2><span>2025 vs 2026</span></div><div id="zoneChart" class="chart"></div></article><article class="glass chart-card"><div class="section-title"><h2>Returns Analysis</h2><span>2026 returned amount</span></div><div id="returnChart" class="chart"></div></article></section>
       <section class="glass leaderboard"><div class="section-title"><h2>Top Customers by State</h2><label class="inline">State <select id="leaderState"></select></label></div><div class="grid2 compact"><div><h3 class="up">Top 10 Growth ≥ 10%</h3><div id="growthChart" class="chart small"></div></div><div><h3 class="down">Top 10 Decline ≤ -10%</h3><div id="declineChart" class="chart small"></div></div></div></section>
+
+      <section class="glass rep-rank">
+        <div class="rep-rank-head">
+          <div><h2>Top 10 Customers by Sales Rep.</h2><div class="rep-sub">Jan–Aug 2025 vs 2026 • <span id="repRankLabel">All Sales Reps</span></div></div>
+          <label class="rep-select-wrap">Sales Rep. <select id="repRankRep"><option>All Sales Reps</option></select></label>
+        </div>
+        <div class="rep-rank-grid">
+          <article class="rep-rank-card"><h3>Top 10 Customers by Sales</h3><p>Highest Jan–Aug 2026 sales</p><div id="repSalesChart" class="chart"></div></article>
+          <article class="rep-rank-card"><h3 class="up">Top 10 Growth ≥ 10%</h3><p>Customers with 2025 sales and growth of at least 10%</p><div id="repGrowthChart" class="chart"></div></article>
+          <article class="rep-rank-card"><h3 class="down">Top 10 Decline ≤ -10%</h3><p>Customers with 2025 sales and decline of at least 10%</p><div id="repDeclineChart" class="chart"></div></article>
+        </div>
+      </section>
+
       <section class="grid2"><article class="glass table-card"><div class="section-title"><h2>Pharmacy Analysis</h2><span>Jan–Aug comparison</span></div><input id="pharmacySearch" class="search" placeholder="Search pharmacy…"><div class="table-wrap"><table id="pharmacyTable"><thead><tr><th>Pharmacy</th><th>State</th><th>Zone</th><th>2025</th><th>2026</th><th>Growth</th><th>Returns 2026</th></tr></thead><tbody></tbody></table></div></article><article class="glass table-card"><div class="section-title"><h2>Customers ≥ 10,000</h2><span>2026 Jan–Aug sales</span></div><div class="table-wrap"><table id="highTable"><thead><tr><th>Customer</th><th>State</th><th>2025</th><th>2026</th><th>Growth</th></tr></thead><tbody></tbody></table></div></article></section>
     </section>
   </main>
   <script src="auth.js?v=20260908-1"></script>
   <script src="app.js?v=20260908-5"></script>
+  <script src="rep-top.js?v=20260908-1"></script>
 </body></html>

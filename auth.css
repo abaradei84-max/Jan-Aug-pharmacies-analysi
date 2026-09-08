@@ -1,0 +1,20 @@
+body.locked{overflow:hidden}
+body.locked>.orb,body.locked>.wrap{filter:blur(10px);pointer-events:none;user-select:none}
+.auth-overlay{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:20px;background:radial-gradient(circle at 25% 15%,rgba(57,231,242,.10),transparent 30%),radial-gradient(circle at 80% 75%,rgba(124,131,255,.10),transparent 28%),rgba(2,6,14,.82);backdrop-filter:blur(12px)}
+.auth-overlay.auth-hidden{display:none}
+.auth-card{width:min(420px,100%);padding:28px;border-radius:22px;background:linear-gradient(145deg,rgba(14,27,49,.98),rgba(6,13,27,.99));border:1px solid rgba(57,231,242,.22);box-shadow:0 24px 80px rgba(0,0,0,.52),0 0 40px rgba(57,231,242,.08)}
+.auth-badge{display:inline-flex;align-items:center;gap:8px;color:#45e6a9;font-size:11px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase}
+.auth-badge:before{content:'';width:7px;height:7px;border-radius:50%;background:#45e6a9;box-shadow:0 0 12px #45e6a9}
+.auth-card h2{margin:10px 0 6px;font-size:28px;letter-spacing:-.8px}
+.auth-card p{margin:0 0 20px;color:#8fa5c2;font-size:13px}
+.auth-field{display:block;color:#aebed3;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.45px;margin-bottom:8px}
+.auth-input{width:100%;padding:12px 13px;border-radius:12px;border:1px solid rgba(143,173,225,.18);background:#06101ee8;color:#f4f8ff;outline:none;font:inherit}
+.auth-input:focus{border-color:rgba(57,231,242,.6);box-shadow:0 0 0 3px rgba(57,231,242,.06)}
+.auth-submit{width:100%;margin-top:12px;padding:12px 14px;border-radius:12px;border:1px solid rgba(57,231,242,.5);background:linear-gradient(135deg,rgba(57,231,242,.14),rgba(124,131,255,.16));color:white;font-weight:800;cursor:pointer}
+.auth-submit:hover{border-color:rgba(57,231,242,.9);box-shadow:0 0 24px rgba(57,231,242,.12)}
+.auth-submit:disabled{opacity:.6;cursor:wait}
+.auth-message{min-height:18px;margin-top:10px;color:#ff7085;font-size:12px}
+.hero-actions{display:flex;gap:10px;align-items:center;position:relative;z-index:2}
+.logout-btn{padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.025);color:#cbd7e6;cursor:pointer;font-weight:700}
+.logout-btn:hover{border-color:rgba(255,112,133,.4);color:white;background:rgba(255,112,133,.06)}
+@media(max-width:760px){.hero-actions{width:100%;flex-direction:column}.logout-btn{width:100%}}
